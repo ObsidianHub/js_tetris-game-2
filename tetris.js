@@ -86,7 +86,7 @@ Piece.prototype.unDraw = function() {
 
 // move down the piece
 Piece.prototype.moveDown = function() {
-  if (!this.collision()) {
+  if (!this.collision(0, 1, this.activeTetromino)) {
     this.unDraw();
     this.y++;
     this.draw();
@@ -97,7 +97,7 @@ Piece.prototype.moveDown = function() {
 
 // move right the piece
 Piece.prototype.moveRight = function() {
-  if (!this.collision()) {
+  if (!this.collision(1, 0, this.activeTetromino)) {
     this.unDraw();
     this.x++;
     this.draw();
@@ -106,7 +106,7 @@ Piece.prototype.moveRight = function() {
 
 // move left the piece
 Piece.prototype.moveLeft = function() {
-  if (!this.collision()) {
+  if (!this.collision(-1, 0, this.activeTetromino)) {
     this.unDraw();
     this.x--;
     this.draw();
@@ -115,8 +115,24 @@ Piece.prototype.moveLeft = function() {
 
 // rotate the piece
 Piece.prototype.rotate = function() {
-  if (!this.collision()) {
+  let nextPattern = this.tetromino[
+    (this.tetrominoN + 1) % this.tetromino.length
+  ];
+  let kick = 0;
+
+  if (this.collision(0, 0, nextPattern)) {
+    if (this.x > COL / 2) {
+      // it's the right wall
+      kick = -1; // we need to move the piece to the left
+    } else {
+      // it's the left wall
+      kick = 1; // we need to move the piece to the right
+    }
+  }
+
+  if (!this.collision(kick, 0, nextPattern)) {
     this.unDraw();
+    this.x += kick;
     this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
     this.activeTetromino = this.tetromino[this.tetrominoN];
     this.draw();
