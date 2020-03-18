@@ -86,31 +86,41 @@ Piece.prototype.unDraw = function() {
 
 // move down the piece
 Piece.prototype.moveDown = function() {
-  this.unDraw();
-  this.y++;
-  this.draw();
+  if (!this.collision()) {
+    this.unDraw();
+    this.y++;
+    this.draw();
+  } else {
+    // we lock the piece and generate a new one
+  }
 };
 
 // move right the piece
 Piece.prototype.moveRight = function() {
-  this.unDraw();
-  this.x++;
-  this.draw();
+  if (!this.collision()) {
+    this.unDraw();
+    this.x++;
+    this.draw();
+  }
 };
 
 // move left the piece
 Piece.prototype.moveLeft = function() {
-  this.unDraw();
-  this.x--;
-  this.draw();
+  if (!this.collision()) {
+    this.unDraw();
+    this.x--;
+    this.draw();
+  }
 };
 
 // rotate the piece
 Piece.prototype.rotate = function() {
-  this.unDraw();
-  this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
-  this.activeTetromino = this.tetromino[this.tetrominoN];
-  this.draw();
+  if (!this.collision()) {
+    this.unDraw();
+    this.tetrominoN = (this.tetrominoN + 1) % this.tetromino.length;
+    this.activeTetromino = this.tetromino[this.tetrominoN];
+    this.draw();
+  }
 };
 
 // collision function
