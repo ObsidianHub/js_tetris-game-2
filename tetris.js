@@ -74,8 +74,21 @@ Piece.prototype.draw = function() {
   }
 };
 
+// undraw a piece
+Piece.prototype.unDraw = function() {
+  for (r = 0; r < this.activeTetromino.length; r++) {
+    for (c = 0; c < this.activeTetromino.length; c++) {
+      // we draw only occupied squares
+      if (this.activeTetromino[r][c]) {
+        drawSquare(this.x + c, this.y + r, VACANT);
+      }
+    }
+  }
+};
+
 // move down the piece
 Piece.prototype.moveDown = function() {
+  this.unDraw();
   this.y++;
   this.draw();
 };
