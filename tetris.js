@@ -23,3 +23,14 @@ for (r = 0; r < ROW; r++) {
     board[r][c] = VACANT;
   }
 }
+
+// draw the board
+function drawBoard() {
+  for (r = 0; r < ROW; r++) {
+    for (c = 0; c < COL; c++) {
+      drawSquare(c, r, board[r][c]);
+    }
+  }
+}
+
+drawBoard();
