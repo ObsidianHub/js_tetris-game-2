@@ -46,6 +46,9 @@ const PIECES = [
   [J, "orange"]
 ];
 
+// init a piece
+let p = new Piece(PIECES[0][0], PIECES[0][1]);
+
 // the object piece
 function Piece(tetromino, color) {
   this.tetromino = tetromino;
@@ -55,6 +58,24 @@ function Piece(tetromino, color) {
   this.activeTetromino = this.tetromino[this.tetrominoN];
 
   // we need to control the pieces
-  this.x = 0;
+  this.x = 3;
   this.y = 0;
 }
+
+// draw a piece to the board
+Piece.prototype.draw = function() {
+  for (r = 0; r < this.activeTetromino.length; r++) {
+    for (c = 0; c < this.activeTetromino.length; c++) {
+      // we draw only occupied squares
+      if (this.activeTetromino[r][c]) {
+        drawSquare(this.x + c, this.y + r, this.color);
+      }
+    }
+  }
+};
+
+// move down the piece
+Piece.prototype.moveDown = function() {
+  this.y++;
+  this.draw();
+};
