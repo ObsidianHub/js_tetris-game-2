@@ -98,6 +98,13 @@ Piece.prototype.moveRight = function() {
   this.draw();
 };
 
+// move left the piece
+Piece.prototype.moveLeft = function() {
+  this.unDraw();
+  this.x--;
+  this.draw();
+};
+
 // drop the piece every 1 sec
 let dropStart = Date.now();
 function drop() {
