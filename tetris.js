@@ -46,8 +46,13 @@ const PIECES = [
   [J, "orange"]
 ];
 
+// generate random pieces
+function randomPiece() {
+  let r = (randomN = Math.floor(Math.random() * PIECES.length));
+  return new Piece(PIECES[r][0], PIECES[r][1]);
+}
 // init a piece
-let p = new Piece(PIECES[0][0], PIECES[0][1]);
+let p = randomPiece();
 
 // the object piece
 function Piece(tetromino, color) {
@@ -92,6 +97,7 @@ Piece.prototype.moveDown = function() {
     this.draw();
   } else {
     // we lock the piece and generate a new one
+    p = randomPiece();
   }
 };
 
